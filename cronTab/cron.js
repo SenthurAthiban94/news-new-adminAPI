@@ -4,7 +4,6 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 function getTOP_IndiaSites(){
     trends('India', 10, function(err, data) {
         if (err) return console.err(err);
-        // console.log(JSON.stringify(data, null, 2));  // Pretty prints JSON 'data'
         let topSites=[];
         Object.keys(data).map((e)=>{
         var singlesite={};
@@ -21,15 +20,14 @@ function getTOP_IndiaSites(){
         //
         var xhr = new XMLHttpRequest();
         var url = "http://localhost:3000/sites";            //https://adminsa.herokuapp.com/sites
+        var data = JSON.stringify(topSites);
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                var json = JSON.parse(xhr.responseText);
-                console.log(json);
+                console.log("Last CRON Completed at "+new Date()+"!!");
             }
         };
-        var data = JSON.stringify(topSites);
         xhr.send(data);
     });
 }
