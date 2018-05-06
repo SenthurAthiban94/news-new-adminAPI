@@ -14,4 +14,8 @@ module.exports = function(app) {
     .get(Sites.read_a_Site)
     .put(Sites.update_a_Site)
     .delete(Sites.delete_a_Site);
+  
+  app.route('/sitesbycities/:countryName')
+  .get(Sites.list_sites_by_city)
+
 };

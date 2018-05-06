@@ -1,16 +1,18 @@
 var express = require('express'),
     app = express(),
     path = require('path');
-    port = process.env.PORT || 3000,
+    port = process.env.PORT || 3001,
     mongoose = require('mongoose'),
     Task = require('./api/models/apiModel'), //created model loading here
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    cors = require('cors'),
+    trends = require('node-google-search-trends');
   
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://senthur:senthur8@ds263109.mlab.com:63109/blogger'); 
 
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

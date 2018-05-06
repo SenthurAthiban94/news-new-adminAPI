@@ -1,7 +1,36 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  Sites = mongoose.model('SitesList');
+    Sites = mongoose.model('SitesList');
+
+exports.list_sites_by_city=function(req,res){
+  var country=req.params.countryName;
+  trends(country, 10, function(err, data) {
+      if (err) return console.err(err);
+      let topSites=[];
+      topSites=Object.keys(data).map((e)=>{
+      var singlesite={};
+          singlesite.title=(data[e]['title'].length) ? data[e]['title'][0] : "";
+          singlesite.description=data[e]['description'].length ? data[e]['description'][0] : "";
+          singlesite.traffic=data[e]['ht:approx_traffic'].length ? data[e]['ht:approx_traffic'][0].replace(/,/g,'').replace('+','') : "";
+          singlesite.contentLink=data[e]['ht:news_item'].length ? ((data[e]['ht:news_item'][0]['ht:news_item_url'].length) ? data[e]['ht:news_item'][0]['ht:news_item_url'][0] : "" ) : "";
+          singlesite.contentImageUrl=data[e]['ht:picture'].length ? data[e]['ht:picture'][0] : "";
+          singlesite.dateTracked=data[e]['pubDate'].length ? data[e]['pubDate'][0] : "";
+          if(data[e]['ht:news_item'].length){
+            singlesite.summary={
+              title   : data[e]['ht:news_item'][0]['ht:news_item_title'] ? data[e]['ht:news_item'][0]['ht:news_item_title'][0] : "",
+              content : data[e]['ht:news_item'][0]['ht:news_item_snippet'] ? data[e]['ht:news_item'][0]['ht:news_item_snippet'][0] : "",
+              link    : data[e]['ht:news_item'][0]['ht:news_item_url'] ? data[e]['ht:news_item'][0]['ht:news_item_url'][0] : "",
+              source  : data[e]['ht:news_item'][0]['ht:news_item_source'] ? data[e]['ht:news_item'][0]['ht:news_item_source'][0] : ""
+            }
+          }
+          topSites.push(singlesite);
+          if(Object.keys(data).length == topSites.length){
+            res.send(JSON.stringify(topSites));      
+          }
+      });
+    });
+}
 
 exports.list_all_Sites = function(req, res) {
     Sites.find({}, function(err, site) {
@@ -55,7 +84,6 @@ function SaveAll(payload){
           }
       });
   });
-  console.log
   return response;
 }
 
