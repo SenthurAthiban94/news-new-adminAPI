@@ -15,7 +15,7 @@ module.exports = function(app) {
     .put(Sites.update_a_Site)
     .delete(Sites.delete_a_Site);
   
-  app.route('/sitesbycities/:countryName')
+  app.route('/sitesbycities/:countryName/:resultCount')
   .get(Sites.list_sites_by_city)
 
 };

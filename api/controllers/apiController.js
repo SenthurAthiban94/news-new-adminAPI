@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 
 exports.list_sites_by_city=function(req,res){
   var country=req.params.countryName;
-  trends(country, 10, function(err, data) {
+  var count=req.params.resultCount ? req.params.resultCount : 10;
+  trends(country, count, function(err, data) {
       if (err) return console.err(err);
       let topSites=[];
       topSites=Object.keys(data).map((e)=>{
