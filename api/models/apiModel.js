@@ -4,9 +4,11 @@ var Schema = mongoose.Schema;
 
 
 var TopSites = new Schema({
-  title: {
+  countryName: {
     type: String,
-    required: 'Kindly enter the name of the task'
+  },
+  title: {
+    type: String
   },
   description: {
     type: String,
@@ -17,10 +19,16 @@ var TopSites = new Schema({
       default:0
   },
   contentLink:{
-        type: String
+      type: String
   },
   contentImageUrl:{
-      type:String
+      type:String,
+  },
+  summary:{
+    title: String,
+    content: String,
+    link: String,
+    source: String
   },
   dateTracked:{
       type:Date
