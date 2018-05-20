@@ -63,17 +63,32 @@ exports.create_a_Site = function(req, res) {
       options = { upsert: true },
       payload = req.body;
       payload.map((e,k) => {
+        var findelement={countryName: e.countryName}
+        if(e.contentLink && e.contentLink.length > 0){
+          findelement.contentLink=e.contentLink;
+        }else{
+          if(e.contentImageUrl && e.contentImageUrl.length > 0){
+            findelement.contentImageUrl=e.contentImageUrl;
+          }else{
+            if(e.summary && Object.keys(e.summary).length){
+              findelement.summary=e.summary;
+            }else{
+              if(e.description && e.description.length > 0){
+                findelement.description=e.description;
+              }else{
+                findelement.title=e.title;
+              }
+            }
+          }
+        }
         // Find the document
-        Sites.findOneAndUpdate({
-          title : e.title,
-          countryName: e.countryName,
-          description : e.description,
-          contentLink : e.contentLink
-        }, options, function(error, result) {
+        Sites.findOneAndUpdate(findelement, options, function(error, result) {
           if (!error) {
               // If the document doesn't exist
               if (!result) {
                   // Create it
+                  // console.log(findelement);
+                  // console.log(e);
                   result = new Sites(e);
               }
               result.traffic=e.traffic;

@@ -7,8 +7,8 @@ var googleSearch = new GoogleSearch({
 var trends = require('node-google-search-trends');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-var countrylist=["India","Argentina","Australia","Austria","Belgium","Brazil","Canada","Chile","Colombia","Czechia","Denmark","Egypt","Finland","France","Germany","Greece","Hong Kong","Hungary","India","Indonesia","Ireland","Israel","Italy","Japan","Kenya","Malaysia","Mexico","Netherlands","New Zealand","Nigeria","Norway","Philippines","Poland","Portugal","Romania","Russia","Saudi Arabia","Singapore","South Africa","South Korea","Spain","Sweden","Switzerland","Taiwan","Thailand","Turkey","Ukraine","United Kingdom","United States","Vietnam"];
-
+var countrylist=["Argentina","Australia","Austria","Belgium","Brazil","Canada","Chile","Colombia","Czechia","Denmark","Egypt","Finland","France","Germany","Greece","Hong Kong","Hungary","India","Indonesia","Ireland","Israel","Italy","Japan","Kenya","Malaysia","Mexico","Netherlands","New Zealand","Nigeria","Norway","Philippines","Poland","Portugal","Romania","Russia","Saudi Arabia","Singapore","South Africa","South Korea","Spain","Sweden","Switzerland","Taiwan","Thailand","Turkey","Ukraine","United Kingdom","United States","Vietnam"];
+// var countrylist=["Ireland","Israel","Italy","Japan"];
 
 function getTOP_IndiaSites(){
     countrylist.map((country,key)=>{

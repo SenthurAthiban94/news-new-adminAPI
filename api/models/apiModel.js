@@ -11,8 +11,7 @@ var TopSites = new Schema({
     type: String
   },
   description: {
-    type: String,
-    default:""
+    type: String
   },
   traffic:{
       type: Number,
@@ -22,7 +21,7 @@ var TopSites = new Schema({
       type: String
   },
   contentImageUrl:{
-      type:String,
+      type:String
   },
   summary:{
     title: String,
