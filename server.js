@@ -9,6 +9,7 @@ var express = require('express'),
     cors = require('cors'),
     trends = require('node-google-search-trends');
 
+    
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://senthur:senthur8@ds263109.mlab.com:63109/blogger'); 
@@ -31,12 +32,6 @@ app.use(function(req, res) {
     res.status(404).sendFile(path.join(__dirname+'/404.html'));
 });
 
-
-app.get('/*', function (req, res, next) {
-    res.setHeader("Cache-Control", "public, max-age=3600");
-    res.setHeader("Expires", new Date(Date.now() + 3600).toUTCString());
-    next();
-});
 
 console.log('Site list RESTful API server started on: ' + port);
 
