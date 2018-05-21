@@ -31,7 +31,7 @@ module.exports = function(app) {
   // todoList Routes
   app.route('/sites')
     .get(cache(),Sites.list_all_Sites)
-    .post(cache(),Sites.create_a_Site)
+    .post(Sites.create_a_Site)
     .delete(cache(),Sites.delete_all_Sites);
 
 

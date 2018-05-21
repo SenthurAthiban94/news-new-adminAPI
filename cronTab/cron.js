@@ -1,4 +1,4 @@
-var request=require("request");
+// var request=require("request");
 var GoogleSearch = require('google-search');
 var googleSearch = new GoogleSearch({
     key: 'AIzaSyBn7F5tuFmuhWoC8ntngoGZ2RYjVG9vcWA',
@@ -6,7 +6,7 @@ var googleSearch = new GoogleSearch({
   });
    
 var trends = require('node-google-search-trends');
-// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 var countrylist=["Argentina","Australia","Austria","Belgium","Brazil","Canada","Chile","Colombia","Czechia","Denmark","Egypt","Finland","France","Germany","Greece","Hong Kong","Hungary","India","Indonesia","Ireland","Israel","Italy","Japan","Kenya","Malaysia","Mexico","Netherlands","New Zealand","Nigeria","Norway","Philippines","Poland","Portugal","Romania","Russia","Saudi Arabia","Singapore","South Africa","South Korea","Spain","Sweden","Switzerland","Taiwan","Thailand","Turkey","Ukraine","United Kingdom","United States","Vietnam"];
 // var countrylist=["Ireland","Israel","Italy","Japan"];
@@ -39,27 +39,27 @@ function getTOP_IndiaSites(){
             // console.log(topSites)
             // Sending and receiving data in JSON format using POST method
             
-            // var xhr = new XMLHttpRequest();
-            // var url = "https://adminsa.herokuapp.com/sites";                    //"http://localhost:3001/sites";           
-            // var data = JSON.stringify(topSites);
-            // xhr.open("POST", url, true);
-            // xhr.setRequestHeader("Content-Type", "application/json");
-            // xhr.onreadystatechange = function () {
-            //     if (xhr.readyState === 4 && xhr.status === 200 && !countrylist[key+1]) {
-            //         console.log("Last CRON Completed at "+new Date()+"!!");
-            //     }
-            // };
-            // xhr.send(data);
-            request({
-                url: "https://adminsa.herokuapp.com/sites",
-                method: 'POST',
-                json:topSites
-                }, function(error, response, body){
-                        //console.log(body);
-                         if(!countrylist[key+1]){
-                                console.log("Last CRON Completed at "+new Date()+"!!");
-                        }
-                });
+            var xhr = new XMLHttpRequest();
+            var url = "https://adminsa.herokuapp.com/sites";                    //"http://localhost:3001/sites";           
+            var data = JSON.stringify(topSites);
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200 && !countrylist[key+1]) {
+                    console.log("Last CRON Completed at "+new Date()+"!!");
+                }
+            };
+            xhr.send(data);
+            // request({
+            //     url: "http://adminsa.herokuapp.com/sites",
+            //     method: 'POST',
+            //     json:topSites
+            //     }, function(error, response, body){
+            //             //console.log(body);
+            //              if(!countrylist[key+1]){
+            //                     console.log("Last CRON Completed at "+new Date()+"!!");
+            //             }
+            //     });
 
         });
     })
