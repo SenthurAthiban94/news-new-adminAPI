@@ -1,4 +1,5 @@
 var express = require('express'),
+    compression = require('compression'),
     app = express(),
     path = require('path');
     port = process.env.PORT || 3001,
@@ -12,6 +13,11 @@ var express = require('express'),
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://senthur:senthur8@ds263109.mlab.com:63109/blogger'); 
 
+// compress responses
+app.use(compression())
+// app.use(compression({filter: shouldCompress}));
+
+// other settings
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -26,3 +32,14 @@ app.use(function(req, res) {
 });
 
 console.log('Site list RESTful API server started on: ' + port);
+
+
+function shouldCompress (req, res) {
+    if (req.headers['x-no-compression']) {
+        // don't compress responses with this request header
+        return false
+    }
+
+    // fallback to standard filter function
+    return compression.filter(req, res)
+}
