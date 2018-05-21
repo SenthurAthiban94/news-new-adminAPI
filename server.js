@@ -31,6 +31,13 @@ app.use(function(req, res) {
     res.status(404).sendFile(path.join(__dirname+'/404.html'));
 });
 
+
+app.get('/*', function (req, res, next) {
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    res.setHeader("Expires", new Date(Date.now() + 3600).toUTCString());
+    next();
+});
+
 console.log('Site list RESTful API server started on: ' + port);
 
 
