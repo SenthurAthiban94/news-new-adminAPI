@@ -1,5 +1,3 @@
-import apicache from 'apicache';
-
 var express = require('express'),
     compression = require('compression'),
     app = express(),
@@ -10,10 +8,6 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
     trends = require('node-google-search-trends');
-
-// Server Cache 
-let cache = apicache.middleware;
-app.use(cache('5 minutes'));
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
